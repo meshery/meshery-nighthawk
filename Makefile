@@ -1,24 +1,34 @@
 check:
 	golangci-lint run
 
-check-clean-cache:
-	golangci-lint cache clean
-
 protoc-setup:
-	wget -P meshes https://raw.githubusercontent.com/layer5io/meshery/master/meshes/meshops.proto
+	cd meshes
+	wget https://raw.githubusercontent.com/meshery/meshery/master/meshes/meshops.proto
 
-proto:
+proto:	
 	protoc -I meshes/ meshes/meshops.proto --go_out=plugins=grpc:./meshes/
 
-
-
-
-
-site:
-	$(jekyll) serve --drafts --livereload
-
-build:
-	$(jekyll) build --drafts
-
 docker:
-	docker run --name site -d --rm -p 4000:4000 -v `pwd`:"/srv/jekyll" jekyll/jekyll:4.0.0 bash -c "bundle install; jekyll serve --drafts --livereload"
+	DOCKER_BUILDKIT=1 docker build -t layer5/meshery-perf .
+
+docker-run:
+	(docker rm -f meshery-perf) || true
+	docker run --name meshery-perf -d \
+	-p 10000:10000 \
+	-e DEBUG=true \
+	layer5/meshery-perf:edge-latest
+
+run:
+	DEBUG=true GOPROXY=direct GOSUMDB=off go run main.go
+
+run-force-dynamic-reg:
+	FORCE_DYNAMIC_REG=true DEBUG=true GOPROXY=direct GOSUMDB=off go run main.go
+error:
+	go run github.com/meshery/meshkit/cmd/errorutil -d . analyze -i ./helpers -o ./helpers
+
+test:
+	export CURRENTCONTEXT="$(kubectl config current-context)" 
+	echo "current-context:" ${CURRENTCONTEXT} 
+	export KUBECONFIG="${HOME}/.kube/config"
+	echo "environment-kubeconfig:" ${KUBECONFIG}
+	GOPROXY=direct GOSUMDB=off GO111MODULE=on go test -v ./...
