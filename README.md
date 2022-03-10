@@ -1,5 +1,6 @@
-# layer5-repo-template
-This repository is used as the boilerplate for consistency across all Layer5 repos.
+# meshery-perf
+
+meshery-perf is a [Meshery](https://github.com/meshery/meshery) component used to run performance tests.
 
 <div>&nbsp;</div>
 
