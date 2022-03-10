@@ -1,6 +1,6 @@
 # meshery-perf
 
-meshery-perf is a [Meshery](https://github.com/meshery/meshery) component used to run performance tests.
+meshery-perf is a [Meshery](https://github.com/meshery/meshery) component used to run performance tests. See https://docs.meshery.io/functionality/performance-management and https://getnighthawk.dev for additional detail.
 
 <div>&nbsp;</div>
 
