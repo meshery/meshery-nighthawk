@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@3
+        uses: actions/checkout@master
         with:
           fetch-depth: 1
       - name: Setup Go
@@ -68,7 +68,7 @@ jobs:
       GO111MODULE: on
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
         with:
           fetch-depth: 1
       - name: Run Gosec Security Scanner
@@ -83,7 +83,7 @@ jobs:
        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
      steps:
      - name: Check out code
-       uses: actions/checkout@3
+       uses: actions/checkout@master
        with:
         fetch-depth: 1
      - name: Setup Go
