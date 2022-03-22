@@ -1,5 +1,5 @@
 name: Meshery Perf Components Generator
-# on:
+on:
 #   push:
 #     branches:
 #       - 'master'
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@master
+        uses: actions/checkout@3
         with:
           fetch-depth: 1
           token: ${{ secrets.GH_ACCESS_TOKEN }}
