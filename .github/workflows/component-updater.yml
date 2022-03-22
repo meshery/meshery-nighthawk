@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@3
+        uses: actions/checkout@master
         with:
           fetch-depth: 1
           token: ${{ secrets.GH_ACCESS_TOKEN }}
