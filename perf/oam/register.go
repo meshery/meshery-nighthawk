@@ -35,7 +35,7 @@ func RegisterWorkloads(runtime, host string) error {
 	oamRDP := []adapter.OAMRegistrantDefinitionPath{}
 	pathSets, err := load(WorkloadPath)
 	if err != nil {
-		return err
+		return ErrLoadingComponents(err)
 	}
 	for _, pathSet := range pathSets {
 		metadata := map[string]string{
@@ -68,7 +68,7 @@ func RegisterTraits(runtime, host string) error {
 
 	pathSets, err := load(traitPath)
 	if err != nil {
-		return err
+		return ErrLoadingComponents(err)
 	}
 
 	for _, pathSet := range pathSets {
