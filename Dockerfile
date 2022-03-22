@@ -33,7 +33,7 @@ ENV DISTRO="debian"
 ENV GOARCH="amd64"
 ENV SERVICE_ADDR="meshery-perf"
 ENV MESHERY_SERVER="http://meshery:9081"
-COPY templates/ ./templates
+# COPY templates/ ./templates
 WORKDIR /
 COPY --from=builder /build/meshery-perf .
 COPY --from=jsonschema-util /kubeopenapi-jsonschema /root/.meshery/bin/kubeopenapi-jsonschema
