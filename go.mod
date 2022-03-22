@@ -12,6 +12,7 @@ replace (
 require (
 	github.com/layer5io/meshery-adapter-library v0.5.3
 	github.com/layer5io/meshkit v0.5.10
+	github.com/meshery/meshery-perf v0.0.0-20220322181150-0d9491aa8df3
 )
 
 require oras.land/oras-go v0.4.0 // indirect
