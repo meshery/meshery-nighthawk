@@ -18,7 +18,7 @@ jobs:
   comment:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
         with:
           ref: master # Set your default branch
 
