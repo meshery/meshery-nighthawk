@@ -1,4 +1,4 @@
-name: Meshery Istio
+name: Meshery Perf
 on:
   push:
     branches:
@@ -18,10 +18,10 @@ jobs:
         with:
           fetch-depth: 1
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.17
-      - run: GOPROXY=https://proxy.golang.org,direct GOSUMDB=off go get -u golang.org/x/lint/golint; go list ./istio/... | grep -v /vendor/ | xargs -L1 /home/runner/go/bin/golint -set_exit_status
+      - run: GOPROXY=https://proxy.golang.org,direct GOSUMDB=off go get -u golang.org/x/lint/golint; go list ./perf/... | grep -v /vendor/ | xargs -L1 /home/runner/go/bin/golint -set_exit_status
   error_check:
     name: Error check
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.17
       - run: GOPROXY=https://proxy.golang.org,direct GOSUMDB=off GO111MODULE=on go get -u github.com/kisielk/errcheck; /home/runner/go/bin/errcheck -tags draft ./...
@@ -44,10 +44,10 @@ jobs:
         with:
           fetch-depth: 1
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.17
-      - run: GOPROXY=https://proxy.golang.org,direct GOSUMDB=off GO111MODULE=on go get -u honnef.co/go/tools/cmd/staticcheck; /home/runner/go/bin/staticcheck -tags draft -checks all ./istio/... # https://staticcheck.io/docs/checks
+      - run: GOPROXY=https://proxy.golang.org,direct GOSUMDB=off GO111MODULE=on go get -u honnef.co/go/tools/cmd/staticcheck; /home/runner/go/bin/staticcheck -tags draft -checks all ./perf/... # https://staticcheck.io/docs/checks
   vet:
     name: Vet
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.17
       - run: GOPROXY=https://proxy.golang.org,direct GOSUMDB=off GO111MODULE=on go vet -tags draft ./...
@@ -68,7 +68,7 @@ jobs:
       GO111MODULE: on
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
         with:
           fetch-depth: 1
       - name: Run Gosec Security Scanner
@@ -87,7 +87,7 @@ jobs:
        with:
         fetch-depth: 1
      - name: Setup Go
-       uses: actions/setup-go@v2
+       uses: actions/setup-go@v3
        with:
         go-version: 1.17
      - name: Create cluster using KinD
