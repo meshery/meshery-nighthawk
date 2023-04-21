@@ -17,7 +17,11 @@ newPRWelcomeComment: >
 firstPRMergeComment: >
   Thanks for your contribution to the Layer5 community! :tada:
    
-  ![Congrats!](https://raw.githubusercontent.com/meshery/meshery/master/.github/welcome/Layer5-celebration.png)
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/meshery/meshery-perf/blob/master/.github/welcome/Meshery-celebration-Dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/meshery/meshery-perf/blob/master/.github/welcome/Meshery-celebration-Light.svg">
+  <img alt="Meshery Logo" src="">
+  </picture>
 
 
 #-------------------------------------------------------------------------------
