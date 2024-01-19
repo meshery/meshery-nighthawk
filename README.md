@@ -32,7 +32,7 @@ alt="Meshery - the Collaborative Cloud Manager" align="left" /></a>
 As a self-service engineering platform, <a href="https://meshery.io">Meshery</a> enables collaborative design and operation of cloud native infrastructure. Through it's extension points, Meshery offers the ability to optionally plugin adapters in order to more deeply integrate with specific systems like <a href="https://getnighthawk.dev">Nighthawk</a>.
 
 <h2><a href="https://layer5.io/meshery">Nighthawk</a></h2>
-<a href="https://getnighthawk.io"><img src="img/readme/nighthawk-full.svg"
+<a href="https://getnighthawk.dev"><img src="img/readme/nighthawk-full.svg"
 style="margin:10px;" width="125px" 
 alt="Nighthawk - modern performance characterization" align="left" /></a>
 <br /><br /><p align="center"><i>If you’re using Meshery or if you like the project, please <a href="https://github.com/meshery/meshery/stargazers">★</a> star this repository to show your support! 🤩</i></p>
