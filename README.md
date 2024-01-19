@@ -29,7 +29,7 @@
 <a href="https://meshery.io"><img src="img/readme/meshery-logo-light-text-tag.svg"
 style="margin:10px;" width="125px" 
 alt="Meshery - the Collaborative Cloud Manager" align="left" /></a>
-As a self-service engineering platform, <a href="https://meshery.io">Meshery</a> enables collaborative design and operation of cloud native infrastructure. Through it's extension points, Meshery offers the ability to optionally plugin adapters in order to more deeply integrate with specific systems like <a href="https://getnighthawk.io">Nighthawk</a>.
+As a self-service engineering platform, <a href="https://meshery.io">Meshery</a> enables collaborative design and operation of cloud native infrastructure. Through it's extension points, Meshery offers the ability to optionally plugin adapters in order to more deeply integrate with specific systems like <a href="https://getnighthawk.dev">Nighthawk</a>.
 
 <h2><a href="https://layer5.io/meshery">Nighthawk</a></h2>
 <a href="https://getnighthawk.io"><img src="img/readme/nighthawk-full.svg"
