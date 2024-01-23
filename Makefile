@@ -9,14 +9,14 @@ proto:
 	protoc -I meshes/ meshes/meshops.proto --go_out=plugins=grpc:./meshes/
 
 docker:
-	DOCKER_BUILDKIT=1 docker build -t layer5/meshery-perf .
+	DOCKER_BUILDKIT=1 docker build -t layer5/meshery-nighthawk .
 
 docker-run:
-	(docker rm -f meshery-perf) || true
-	docker run --name meshery-perf -d \
+	(docker rm -f meshery-nighthawk) || true
+	docker run --name meshery-nighthawk -d \
 	-p 10000:10000 \
 	-e DEBUG=true \
-	layer5/meshery-perf:edge-latest
+	layer5/meshery-nighthawk:edge-latest
 
 run:
 	DEBUG=true GOPROXY=direct GOSUMDB=off go run main.go

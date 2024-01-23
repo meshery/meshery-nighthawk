@@ -18,7 +18,7 @@ const (
 )
 
 var (
-	PerfOperation = "meshery-perf"
+	PerfOperation = "meshery-nighthawk"
 
 	ServerVersion  = status.None
 	ServerGitSHA   = status.None
@@ -38,14 +38,14 @@ var (
 	}
 
 	ServerConfig = map[string]string{
-		"name":     "meshery-perf",
+		"name":     "meshery-nighthawk",
 		"type":     "adapter",
 		"port":     "10013",
 		"traceurl": status.None,
 	}
 
 	MeshSpec = map[string]string{
-		"name":    "meshery-perf",
+		"name":    "meshery-nighthawk",
 		"status":  status.NotInstalled,
 		"version": status.None,
 	}
