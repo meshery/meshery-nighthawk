@@ -17,7 +17,7 @@ var AllVersions []string
 
 const Component = "Perf"
 
-//NewConfig creates the configuration for creating components
+// NewConfig creates the configuration for creating components
 func NewConfig(version string) manifests.Config {
 	return manifests.Config{
 		Name:        "meshery-perf",
