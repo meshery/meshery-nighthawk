@@ -26,7 +26,7 @@ jobs:
           (FORCE_DYNAMIC_REG=true DEBUG=true go run main.go > log.txt 2>&1) &  
           end=$((SECONDS+300))
           while [ $SECONDS -lt $end ]; do
-              if  [ "$(cat log.txt | grep "Component Creation completed for version")" != "" ];then
+              if  [ "$(cat log.txt | grep "Model creation completed for version")" != "" ];then
                   echo "New components created"
                   break
               fi
