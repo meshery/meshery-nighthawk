@@ -40,5 +40,5 @@ jobs:
           commit_user_email: ci@layer5.io
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: "--signoff"
-          commit_message: "[Meshery-perf] Components generated from latest capabilities"
+          commit_message: "[Meshery-Nighthawk] Components generated from latest capabilities"
           branch: master
