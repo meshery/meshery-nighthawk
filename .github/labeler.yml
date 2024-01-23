@@ -1,0 +1,17 @@
+area/docs:
+  - "docs/**/*"
+area/ci:
+  - ".github/**/*"
+component/ui:
+  - "ui/**/*"
+component/nighthawk:
+  - "server/**/*"
+area/models:
+  - "templates/models/**/*"
+component/extensions:
+  - "docker-extension/**/*"
+  - "ui/components/ExtensionSandbox.js"
+  - "ui/remote-component.config.js"
+area/lifecycle:
+  - "install/*"
+  - "build/**/*"
