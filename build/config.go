@@ -3,6 +3,7 @@ package build
 import (
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/layer5io/meshery-adapter-library/adapter"
 	"github.com/layer5io/meshkit/utils"
@@ -15,24 +16,28 @@ var LatestVersion string
 var WorkloadPath string
 var AllVersions []string
 
-const Component = "Perf"
+const Component = "Nighthawk"
+
+var MeshModelConfig = adapter.MeshModelConfig{ //Move to build/config.go
+	Category: "Observability and Analysis",
+	Metadata: map[string]interface{}{},
+}
 
 // NewConfig creates the configuration for creating components
 func NewConfig(version string) manifests.Config {
 	return manifests.Config{
-		Name:        "meshery-perf",
+		Name:        "meshery-nighthawk",
 		Type:        Component,
 		MeshVersion: version,
-		Filter: manifests.CrdFilter{
-			RootFilter:    []string{"$[?(@.kind==\"CustomResourceDefinition\")]"},
-			NameFilter:    []string{"$..[\"spec\"][\"names\"][\"kind\"]"},
-			VersionFilter: []string{"$[0]..spec.versions[0]"},
-			GroupFilter:   []string{"$[0]..spec"},
-			SpecFilter:    []string{"$[0]..openAPIV3Schema.properties.spec"},
-			ItrFilter:     []string{"$[?(@.spec.names.kind"},
-			ItrSpecFilter: []string{"$[?(@.spec.names.kind"},
-			VField:        "name",
-			GField:        "group",
+		CrdFilter: manifests.NewCueCrdFilter(manifests.ExtractorPaths{
+			NamePath:    "spec.names.kind",
+			IdPath:      "spec.names.kind",
+			VersionPath: "spec.versions[0].name",
+			GroupPath:   "spec.group",
+			SpecPath:    "spec.versions[0].schema.openAPIV3Schema"}, false),
+		ExtractCrds: func(manifest string) []string {
+			crds := strings.Split(manifest, "---")
+			return crds
 		},
 	}
 }
@@ -40,11 +45,11 @@ func NewConfig(version string) manifests.Config {
 func init() {
 	wd, _ := os.Getwd()
 	WorkloadPath = filepath.Join(wd, "templates", "oam", "workloads")
-	AllVersions, _ = utils.GetLatestReleaseTagsSorted("meshery", "meshery-perf")
+	AllVersions, _ = utils.GetLatestReleaseTagsSorted("meshery", "meshery-nighthawk")
 	if len(AllVersions) == 0 {
 		return
 	}
 	LatestVersion = AllVersions[len(AllVersions)-1]
 	DefaultGenerationMethod = adapter.Manifests
-	DefaultGenerationURL = "https://raw.githubusercontent.com/meshery/meshery-perf/" + LatestVersion + "/manifests/charts/crds.yaml"
+	DefaultGenerationURL = "https://raw.githubusercontent.com/meshery/meshery-nighthawk/" + LatestVersion + "/manifests/charts/crds.yaml"
 }

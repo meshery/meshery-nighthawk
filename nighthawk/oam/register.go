@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/meshery/meshery-perf/internal/config"
+	"github.com/meshery/meshery-nighthawk/internal/config"
 
 	"github.com/layer5io/meshery-adapter-library/adapter"
 )

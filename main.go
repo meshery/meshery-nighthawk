@@ -1,4 +1,4 @@
-// Copyright 2022 The Meshery Authors
+// Copyright 2024 The Meshery Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,14 +26,14 @@ import (
 	"github.com/layer5io/meshery-adapter-library/api/grpc"
 	configprovider "github.com/layer5io/meshkit/config/provider"
 	"github.com/layer5io/meshkit/logger"
-	"github.com/meshery/meshery-perf/build"
-	"github.com/meshery/meshery-perf/internal/config"
-	"github.com/meshery/meshery-perf/perf"
-	"github.com/meshery/meshery-perf/perf/oam"
+	"github.com/meshery/meshery-nighthawk/build"
+	"github.com/meshery/meshery-nighthawk/internal/config"
+	"github.com/meshery/meshery-nighthawk/nighthawk"
+	"github.com/meshery/meshery-nighthawk/nighthawk/oam"
 )
 
 var (
-	serviceName = "meshery-perf"
+	serviceName = "meshery-nighthawk"
 	version     = "edge"
 	gitsha      = "none"
 )
@@ -87,7 +87,7 @@ func main() {
 	}
 
 	// Initialize Handler intance
-	handler := perf.New(cfg, log, kubeconfigHandler)
+	handler := nighthawk.New(cfg, log, kubeconfigHandler)
 	handler = adapter.AddLogger(log, handler)
 
 	service.Handler = handler
