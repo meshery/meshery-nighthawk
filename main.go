@@ -18,24 +18,26 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"path/filepath"
 	"strings"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/layer5io/meshery-adapter-library/adapter"
 	"github.com/layer5io/meshery-adapter-library/api/grpc"
 	configprovider "github.com/layer5io/meshkit/config/provider"
 	"github.com/layer5io/meshkit/logger"
+	"github.com/layer5io/meshkit/utils/events"
 	"github.com/meshery/meshery-nighthawk/build"
 	"github.com/meshery/meshery-nighthawk/internal/config"
 	"github.com/meshery/meshery-nighthawk/nighthawk"
-	"github.com/meshery/meshery-nighthawk/nighthawk/oam"
+	"github.com/sirupsen/logrus"
 )
 
 var (
 	serviceName = "meshery-nighthawk"
 	version     = "edge"
 	gitsha      = "none"
+	instanceID  = uuid.NewString()
 )
 
 func init() {
@@ -48,9 +50,13 @@ func init() {
 }
 
 func main() {
+	logLevel := logrus.InfoLevel
+	if isDebug() {
+		logLevel = logrus.InfoLevel
+	}
 	log, err := logger.New(serviceName, logger.Options{
 		Format:     logger.SyslogLogFormat,
-		DebugLevel: isDebug(),
+		LogLevel: int(logLevel),
 	})
 	if err != nil {
 		fmt.Println(err)
@@ -86,12 +92,14 @@ func main() {
 		os.Exit(1)
 	}
 
+	ev := events.NewEventStreamer()
+
 	// Initialize Handler intance
-	handler := nighthawk.New(cfg, log, kubeconfigHandler)
+	handler := nighthawk.New(cfg, log, kubeconfigHandler, ev)
 	handler = adapter.AddLogger(log, handler)
 
 	service.Handler = handler
-	service.Channel = make(chan interface{}, 10)
+	service.EventStreamer = ev
 	service.StartedAt = time.Now()
 	service.Version = version
 	service.GitSHA = gitsha
@@ -100,7 +108,7 @@ func main() {
 
 	// Server Initialization
 	log.Info("Component listening at port: ", service.Port)
-	err = grpc.Start(service, nil)
+	err = grpc.Start(service)
 	if err != nil {
 		log.Error(err)
 		os.Exit(1)
@@ -138,13 +146,10 @@ func serviceAddress() string {
 func registerCapabilities(port string, log logger.Handler) {
 	// Register workloads
 	log.Info("Registering static workloads with Meshery Server...")
-	if err := oam.RegisterWorkloads(mesheryServerAddress(), serviceAddress()+":"+port); err != nil {
+	if err := adapter.RegisterMeshModelComponents(instanceID, mesheryServerAddress(), serviceAddress(), port); err != nil {
 		log.Error(err)
 	}
-	// Register traits
-	if err := oam.RegisterTraits(mesheryServerAddress(), serviceAddress()+":"+port); err != nil {
-		log.Error(err)
-	}
+
 	log.Info("Successfully registered static components with Meshery Server.")
 }
 
@@ -167,7 +172,7 @@ func registerWorkloads(port string, log logger.Handler) {
 	url := build.DefaultGenerationURL
 	gm := build.DefaultGenerationMethod
 	// Prechecking to skip comp gen
-	if os.Getenv("FORCE_DYNAMIC_REG") != "true" && oam.AvailableVersions[version] {
+	if os.Getenv("FORCE_DYNAMIC_REG") != "true" && adapter.AvailableVersions[version] {
 		log.Info("Components available statically for version ", version, ". Skipping dynamic component registeration")
 		return
 	}
@@ -181,9 +186,11 @@ func registerWorkloads(port string, log logger.Handler) {
 
 	log.Info("Registering latest workload components for version ", version)
 	err := adapter.CreateComponents(adapter.StaticCompConfig{
-		URL:     url,
-		Method:  gm,
-		Path:    build.WorkloadPath,
+		URL:             url,
+		Method:          gm,
+		MeshModelPath:   build.MeshModelPath,
+		MeshModelConfig: build.MeshModelConfig,
+
 		DirName: version,
 		Config:  build.NewConfig(version),
 	})
@@ -198,16 +205,10 @@ func registerWorkloads(port string, log logger.Handler) {
 
 	//Now we will register in case
 	log.Info("Registering workloads with Meshery Server for version ", version)
-	originalPath := oam.WorkloadPath
-	oam.WorkloadPath = filepath.Join(originalPath, version)
-	defer resetWorkloadPath(originalPath)
-	if err := oam.RegisterWorkloads(mesheryServerAddress(), serviceAddress()+":"+port); err != nil {
+
+	if err := adapter.RegisterMeshModelComponents(instanceID, mesheryServerAddress(), serviceAddress(), port); err != nil {
 		log.Error(err)
 		return
 	}
 	log.Info("Latest workload components successfully registered for version ", version)
-}
-
-func resetWorkloadPath(orig string) {
-	oam.WorkloadPath = orig
 }
