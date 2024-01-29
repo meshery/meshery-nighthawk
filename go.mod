@@ -10,7 +10,7 @@ replace (
 
 require (
 	github.com/google/uuid v1.4.0
-	github.com/layer5io/meshery-adapter-library v0.6.11
+	github.com/layer5io/meshery-adapter-library v0.7.1
 	github.com/layer5io/meshkit v0.7.9
 	github.com/sirupsen/logrus v1.9.3
 	gopkg.in/yaml.v2 v2.4.0
