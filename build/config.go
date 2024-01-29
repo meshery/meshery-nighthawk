@@ -1,6 +1,9 @@
 package build
 
 import (
+	"encoding/json"
+	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -13,7 +16,7 @@ import (
 var DefaultGenerationMethod string
 var DefaultGenerationURL string
 var LatestVersion string
-var WorkloadPath string
+var MeshModelPath string
 var AllVersions []string
 
 const Component = "Nighthawk"
@@ -43,8 +46,19 @@ func NewConfig(version string) manifests.Config {
 }
 
 func init() {
+	//Initialize Metadata including logo svgs
+	modelMetadata, _ := os.Open("./build/meshmodel_metadata.json")
+	defer func() {
+		if err := modelMetadata.Close(); err != nil {
+			fmt.Printf("Error closing file: %s\n", err)
+		}
+	}()
+	byt, _ := io.ReadAll(modelMetadata)
+
+	_ = json.Unmarshal(byt, &MeshModelConfig.Metadata)
+
 	wd, _ := os.Getwd()
-	WorkloadPath = filepath.Join(wd, "templates", "oam", "workloads")
+	MeshModelPath = filepath.Join(wd, "templates", "meshmodel", "components")
 	AllVersions, _ = utils.GetLatestReleaseTagsSorted("meshery", "meshery-nighthawk")
 	if len(AllVersions) == 0 {
 		return
