@@ -2,6 +2,9 @@ package nighthawk
 
 import (
 	"context"
+	"errors"
+	"fmt"
+	"strings"
 
 	"github.com/layer5io/meshery-adapter-library/adapter"
 	"github.com/layer5io/meshery-adapter-library/meshes"
@@ -10,6 +13,7 @@ import (
 	"github.com/layer5io/meshkit/logger"
 	"github.com/layer5io/meshkit/models"
 	"github.com/layer5io/meshkit/utils/events"
+	"github.com/meshery/meshery-nighthawk/internal/config"
 	"gopkg.in/yaml.v2"
 )
 
@@ -29,6 +33,11 @@ func New(c meshkitCfg.Handler, l logger.Handler, kc meshkitCfg.Handler, ev *even
 	}
 }
 
+func (nighthawk *Nighthawk) ProcessOAM(ctx context.Context, req adapter.OAMRequest) (string, error) {
+	nighthawk.Log.Info("Processing request ", req)
+	return "", nil
+}
+
 // ApplyOperation applies the operation on nighthawk
 func (nighthawk *Nighthawk) ApplyOperation(ctx context.Context, opReq adapter.OperationRequest) error {
 	err := nighthawk.CreateKubeconfigs(opReq.K8sConfigs)
@@ -38,6 +47,8 @@ func (nighthawk *Nighthawk) ApplyOperation(ctx context.Context, opReq adapter.Op
 	kubeConfigs := opReq.K8sConfigs
 	operations := make(adapter.Operations)
 	requestedVersion := adapter.Version(opReq.Version)
+
+	nighthawk.Log.Info(fmt.Sprintf("Applying %s with kubeconfig %v: requested nighthawk-apater version %s", opReq.OperationName, kubeConfigs, requestedVersion))
 	err = nighthawk.Config.GetObject(adapter.OperationsKey, &operations)
 	if err != nil {
 		return err
@@ -47,40 +58,13 @@ func (nighthawk *Nighthawk) ApplyOperation(ctx context.Context, opReq adapter.Op
 		OperationId:   opReq.OperationID,
 		Summary:       status.Deploying,
 		Details:       "Operation is not supported",
-		Component:     internalconfig.ServerConfig["type"],
-		ComponentName: internalconfig.ServerConfig["name"],
+		Component:     config.ServerConfig["type"],
+		ComponentName: config.ServerConfig["name"],
 	}
+	nighthawk.StreamInfo(e)
 	return nil
 }
 
-// CreateKubeconfigs creates and writes passed kubeconfig onto the filesystem
-func (nighthawk *Nighthawk) CreateKubeconfigs(kubeconfigs []string) error {
-	var errs = make([]error, 0)
-	for _, kubeconfig := range kubeconfigs {
-		kconfig := models.Kubeconfig{}
-		err := yaml.Unmarshal([]byte(kubeconfig), &kconfig)
-		if err != nil {
-			errs = append(errs, err)
-			continue
-		}
-
-		// To have control over what exactly to take in on kubeconfig
-		nighthawk.KubeconfigHandler.SetKey("kind", kconfig.Kind)
-		nighthawk.KubeconfigHandler.SetKey("apiVersion", kconfig.APIVersion)
-		nighthawk.KubeconfigHandler.SetKey("current-context", kconfig.CurrentContext)
-		err = nighthawk.KubeconfigHandler.SetObject("preferences", kconfig.Preferences)
-		if err != nil {
-			errs = append(errs, err)
-			continue
-		}
-
-		err = nighthawk.KubeconfigHandler.SetObject("clusters", kconfig.Clusters)
-		if err != nil {
-			errs = append(errs, err)
-			continue
-		}
-
-		err = 
 // CreateKubeconfigs creates and writes passed kubeconfig onto the filesystem
 func (nighthawk *Nighthawk) CreateKubeconfigs(kubeconfigs []string) error {
 	var errs = make([]error, 0)
@@ -123,22 +107,20 @@ func (nighthawk *Nighthawk) CreateKubeconfigs(kubeconfigs []string) error {
 	if len(errs) == 0 {
 		return nil
 	}
-	return mergeErrors(errs)
+	return CombineErrors(errs, "\n")
 }
-.KubeconfigHandler.SetObject("users", kconfig.Users)
-		if err != nil {
-			errs = append(errs, err)
-			continue
-		}
 
-		err = nighthawk.KubeconfigHandler.SetObject("contexts", kconfig.Contexts)
-		if err != nil {
-			errs = append(errs, err)
-			continue
-		}
-	}
+// combineErrors merges a slice of error
+// into one error separated by the given separator
+func CombineErrors(errs []error, sep string) error {
 	if len(errs) == 0 {
 		return nil
 	}
-	return mergeErrors(errs)
+
+	var errString []string
+	for _, err := range errs {
+		errString = append(errString, err.Error())
+	}
+
+	return errors.New(strings.Join(errString, sep))
 }
