@@ -9,10 +9,9 @@ replace (
 )
 
 require (
-	github.com/google/uuid v1.4.0
+	github.com/google/uuid v1.6.0
 	github.com/layer5io/meshery-adapter-library v1.1.0
 	github.com/layer5io/meshkit v0.7.10
-	github.com/layer5io/meshery-adapter-library v1.1.0
 	github.com/sirupsen/logrus v1.9.3
 	gopkg.in/yaml.v2 v2.4.0
 )
