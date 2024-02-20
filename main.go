@@ -55,7 +55,7 @@ func main() {
 		logLevel = logrus.InfoLevel
 	}
 	log, err := logger.New(serviceName, logger.Options{
-		Format:     logger.SyslogLogFormat,
+		Format:   logger.SyslogLogFormat,
 		LogLevel: int(logLevel),
 	})
 	if err != nil {
