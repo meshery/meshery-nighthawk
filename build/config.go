@@ -47,7 +47,7 @@ func NewConfig(version string) manifests.Config {
 
 func init() {
 	//Initialize Metadata including logo svgs
-	modelMetadata, _ := os.Open("./build/meshmodel_metadata.json")
+	modelMetadata, _ := os.Open("./build/model_metadata.json")
 	defer func() {
 		if err := modelMetadata.Close(); err != nil {
 			fmt.Printf("Error closing file: %s\n", err)
