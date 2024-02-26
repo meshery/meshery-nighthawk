@@ -1,0 +1,59 @@
+{
+  "nested": {
+    "smp": {
+      "options": {
+        "csharp_namespace": "Smp",
+        "go_package": "./spec;smp",
+        "java_multiple_files": true,
+        "java_outer_classname": "ServiceMeshProto",
+        "java_package": "com.smp",
+        "objc_class_prefix": "smp",
+        "php_namespace": "Smp",
+        "ruby_package": "Smp"
+      },
+      "nested": {
+        "ServiceMesh": {
+          "fields": {
+            "type": {
+              "type": "Type",
+              "id": 1
+            },
+            "version": {
+              "type": "string",
+              "id": 2
+            },
+            "labels": {
+              "keyType": "string",
+              "type": "string",
+              "id": 3
+            },
+            "annotations": {
+              "keyType": "string",
+              "type": "string",
+              "id": 4
+            }
+          },
+          "nested": {
+            "Type": {
+              "values": {
+                "INVALID_MESH": 0,
+                "APP_MESH": 1,
+                "CONSUL": 2,
+                "ISTIO": 3,
+                "KUMA": 4,
+                "LINKERD": 5,
+                "TRAEFIK_MESH": 6,
+                "OCTARINE": 7,
+                "NETWORK_SERVICE_MESH": 8,
+                "TANZU": 9,
+                "OPEN_SERVICE_MESH": 10,
+                "NGINX_SERVICE_MESH": 11,
+                "CILIUM_SERVICE_MESH": 12
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

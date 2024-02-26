@@ -1,0 +1,725 @@
+{
+  "nested": {
+    "smp": {
+      "options": {
+        "csharp_namespace": "Smp",
+        "go_package": "./spec;smp",
+        "java_multiple_files": true,
+        "java_outer_classname": "ServiceMeshProto",
+        "java_package": "com.smp",
+        "objc_class_prefix": "smp",
+        "php_namespace": "Smp",
+        "ruby_package": "Smp"
+      },
+      "nested": {
+        "PerformanceTestConfig": {
+          "fields": {
+            "smpVersion": {
+              "type": "string",
+              "id": 1
+            },
+            "id": {
+              "type": "string",
+              "id": 2
+            },
+            "name": {
+              "type": "string",
+              "id": 3
+            },
+            "labels": {
+              "keyType": "string",
+              "type": "string",
+              "id": 4
+            },
+            "clients": {
+              "rule": "repeated",
+              "type": "Client",
+              "id": 5
+            },
+            "duration": {
+              "type": "string",
+              "id": 6
+            }
+          },
+          "nested": {
+            "Client": {
+              "fields": {
+                "internal": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "loadGenerator": {
+                  "type": "string",
+                  "id": 2
+                },
+                "protocol": {
+                  "type": "Protocol",
+                  "id": 3
+                },
+                "connections": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "rps": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "headers": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 6
+                },
+                "cookies": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 7
+                },
+                "body": {
+                  "type": "string",
+                  "id": 8
+                },
+                "contentType": {
+                  "type": "string",
+                  "id": 9
+                },
+                "endpointUrls": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                },
+                "sslCertificate": {
+                  "type": "string",
+                  "id": 11
+                },
+                "additionalOptions": {
+                  "type": "string",
+                  "id": 12
+                }
+              },
+              "nested": {
+                "Protocol": {
+                  "values": {
+                    "PROTOCOL_INVALID": 0,
+                    "PROTOCOL_HTTP": 1,
+                    "PROTOCOL_TCP": 2,
+                    "PROTOCOL_UDP": 3,
+                    "PROTOCOL_GRPC": 4
+                  }
+                }
+              }
+            }
+          }
+        },
+        "PerformanceTestResult": {
+          "fields": {
+            "smpVersion": {
+              "type": "string",
+              "id": 1
+            },
+            "id": {
+              "type": "string",
+              "id": 2
+            },
+            "labels": {
+              "keyType": "string",
+              "type": "string",
+              "id": 3
+            },
+            "startTime": {
+              "type": "google.protobuf.Timestamp",
+              "id": 4
+            },
+            "endTime": {
+              "type": "google.protobuf.Timestamp",
+              "id": 5
+            },
+            "latenciesMs": {
+              "type": "Latency",
+              "id": 6
+            },
+            "actualQps": {
+              "type": "double",
+              "id": 7
+            },
+            "detailsUri": {
+              "type": "string",
+              "id": 8
+            },
+            "testId": {
+              "type": "string",
+              "id": 9
+            },
+            "meshConfigId": {
+              "type": "string",
+              "id": 10
+            },
+            "envId": {
+              "type": "string",
+              "id": 11
+            }
+          },
+          "nested": {
+            "Latency": {
+              "fields": {
+                "min": {
+                  "type": "double",
+                  "id": 1
+                },
+                "average": {
+                  "type": "double",
+                  "id": 2
+                },
+                "p50": {
+                  "type": "double",
+                  "id": 3
+                },
+                "p90": {
+                  "type": "double",
+                  "id": 4
+                },
+                "p99": {
+                  "type": "double",
+                  "id": 5
+                },
+                "max": {
+                  "type": "double",
+                  "id": 6
+                }
+              }
+            },
+            "CPU": {
+              "fields": {
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "user": {
+                  "type": "double",
+                  "id": 2
+                },
+                "nice": {
+                  "type": "double",
+                  "id": 3
+                },
+                "system": {
+                  "type": "double",
+                  "id": 4
+                },
+                "idle": {
+                  "type": "double",
+                  "id": 5
+                },
+                "iowait": {
+                  "type": "double",
+                  "id": 6
+                },
+                "hardwareInterrupt": {
+                  "type": "double",
+                  "id": 7
+                },
+                "softwareInterrupt": {
+                  "type": "double",
+                  "id": 8
+                },
+                "steal": {
+                  "type": "double",
+                  "id": 9
+                }
+              }
+            },
+            "Memory": {
+              "fields": {
+                "memTotalMb": {
+                  "type": "double",
+                  "id": 1
+                },
+                "memFreeMb": {
+                  "type": "double",
+                  "id": 2
+                },
+                "memUsedMb": {
+                  "type": "double",
+                  "id": 3
+                }
+              }
+            },
+            "Swap": {
+              "fields": {
+                "swapTotalMb": {
+                  "type": "double",
+                  "id": 1
+                },
+                "swapFreeMb": {
+                  "type": "double",
+                  "id": 2
+                },
+                "swapUsedMb": {
+                  "type": "double",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
+        "ServiceMeshConfig": {
+          "fields": {
+            "smpVersion": {
+              "type": "string",
+              "id": 1
+            },
+            "id": {
+              "type": "string",
+              "id": 2
+            },
+            "labels": {
+              "keyType": "string",
+              "type": "string",
+              "id": 3
+            },
+            "ingressGateway": {
+              "type": "IngressGateway",
+              "id": 4
+            },
+            "sidecar": {
+              "type": "Sidecar",
+              "id": 5
+            },
+            "meshTelemetry": {
+              "type": "MeshTelemetry",
+              "id": 6
+            },
+            "meshPolicy": {
+              "type": "MeshPolicy",
+              "id": 7
+            },
+            "meshControlPlane": {
+              "type": "MeshControlPlane",
+              "id": 8
+            },
+            "meshPolicyEnabled": {
+              "type": "bool",
+              "id": 9
+            },
+            "meshTelemetryEnabled": {
+              "type": "bool",
+              "id": 10
+            },
+            "mtlsEnabled": {
+              "type": "bool",
+              "id": 11
+            },
+            "proxyConcurrency": {
+              "type": "int32",
+              "id": 12
+            },
+            "meshBuild": {
+              "type": "string",
+              "id": 13
+            },
+            "proxyBuild": {
+              "type": "string",
+              "id": 14
+            },
+            "expGroupUuid": {
+              "type": "string",
+              "id": 15
+            },
+            "expUuid": {
+              "type": "string",
+              "id": 16
+            },
+            "profile": {
+              "type": "string",
+              "id": 17
+            },
+            "meshType": {
+              "type": "ServiceMesh",
+              "id": 18
+            },
+            "applicationMetadata": {
+              "type": "ApplicationMetadata",
+              "id": 19
+            }
+          },
+          "nested": {
+            "IngressGateway": {
+              "fields": {
+                "count": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "memMb": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "rps": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "bps": {
+                  "type": "int32",
+                  "id": 5
+                }
+              }
+            },
+            "EgressGateway": {
+              "fields": {
+                "count": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "memMb": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "rps": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "bps": {
+                  "type": "int32",
+                  "id": 5
+                }
+              }
+            },
+            "Sidecar": {
+              "fields": {
+                "count": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "memMb": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "rps": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "bps": {
+                  "type": "int32",
+                  "id": 5
+                }
+              }
+            },
+            "MeshTelemetry": {
+              "fields": {
+                "count": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "memMb": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "rps": {
+                  "type": "int32",
+                  "id": 4
+                }
+              }
+            },
+            "MeshPolicy": {
+              "fields": {
+                "count": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "memMb": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "rps": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "cacheHitRate": {
+                  "type": "int32",
+                  "id": 5
+                }
+              }
+            },
+            "MeshControlPlane": {
+              "fields": {
+                "count": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "memMb": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "endpoints": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "services": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "sidecars": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "virtualServices": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "destinationRules": {
+                  "type": "int32",
+                  "id": 8
+                },
+                "ldsLatencyMs": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "cdsLatencyMs": {
+                  "type": "int32",
+                  "id": 10
+                }
+              }
+            }
+          }
+        },
+        "EnvironmentConfig": {
+          "fields": {
+            "smpVersion": {
+              "type": "string",
+              "id": 1
+            },
+            "id": {
+              "type": "string",
+              "id": 2
+            },
+            "labels": {
+              "keyType": "string",
+              "type": "string",
+              "id": 3
+            },
+            "kubernetesVersion": {
+              "type": "string",
+              "id": 4
+            },
+            "nodes": {
+              "rule": "repeated",
+              "type": "Node",
+              "id": 5
+            },
+            "individualWorkloads": {
+              "rule": "repeated",
+              "type": "IndividualWorkload",
+              "id": 6
+            },
+            "trafficMetadata": {
+              "type": "TrafficMetadata",
+              "id": 7
+            }
+          },
+          "nested": {
+            "Node": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "cores": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "memMb": {
+                  "type": "int64",
+                  "id": 3
+                }
+              }
+            },
+            "IndividualWorkload": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "count": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "cpuMcores": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "memMb": {
+                  "type": "int32",
+                  "id": 4
+                }
+              }
+            }
+          }
+        },
+        "ApplicationMetadata": {
+          "fields": {
+            "applicationName": {
+              "type": "string",
+              "id": 1
+            },
+            "applicationVersion": {
+              "type": "string",
+              "id": 2
+            },
+            "helmchartName": {
+              "type": "string",
+              "id": 3
+            },
+            "helmchartVersion": {
+              "type": "string",
+              "id": 4
+            },
+            "cnabspecVersion": {
+              "type": "string",
+              "id": 5
+            },
+            "composeVersion": {
+              "type": "string",
+              "id": 6
+            },
+            "clusterName": {
+              "type": "string",
+              "id": 7
+            },
+            "k8sVersionSupported": {
+              "type": "string",
+              "id": 8
+            },
+            "applicationProtocol": {
+              "type": "ApplicationProtocol",
+              "id": 9
+            }
+          },
+          "nested": {
+            "ApplicationProtocol": {
+              "values": {
+                "PROTOCOL_INVALID": 0,
+                "PROTOCOL_HTTP": 1,
+                "PROTOCOL_HTTPS": 2
+              }
+            }
+          }
+        },
+        "TrafficMetadata": {
+          "fields": {
+            "loadBalanceName": {
+              "type": "string",
+              "id": 1
+            },
+            "loadBalanceIp": {
+              "type": "string",
+              "id": 2
+            },
+            "hostEndpoint": {
+              "type": "string",
+              "id": 3
+            },
+            "prometheusUrl": {
+              "type": "string",
+              "id": 4
+            },
+            "httpHeaders": {
+              "type": "string",
+              "id": 5
+            },
+            "userAgent": {
+              "type": "string",
+              "id": 6
+            },
+            "pingHealthEndpoint": {
+              "type": "string",
+              "id": 7
+            }
+          }
+        },
+        "ServiceMesh": {
+          "fields": {
+            "type": {
+              "type": "Type",
+              "id": 1
+            },
+            "version": {
+              "type": "string",
+              "id": 2
+            },
+            "labels": {
+              "keyType": "string",
+              "type": "string",
+              "id": 3
+            },
+            "annotations": {
+              "keyType": "string",
+              "type": "string",
+              "id": 4
+            }
+          },
+          "nested": {
+            "Type": {
+              "values": {
+                "INVALID_MESH": 0,
+                "APP_MESH": 1,
+                "CONSUL": 2,
+                "ISTIO": 3,
+                "KUMA": 4,
+                "LINKERD": 5,
+                "TRAEFIK_MESH": 6,
+                "OCTARINE": 7,
+                "NETWORK_SERVICE_MESH": 8,
+                "TANZU": 9,
+                "OPEN_SERVICE_MESH": 10,
+                "NGINX_SERVICE_MESH": 11,
+                "CILIUM_SERVICE_MESH": 12
+              }
+            }
+          }
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
