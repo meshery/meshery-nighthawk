@@ -1,0 +1,43 @@
+{
+  "kind": "PerformaceTestConfig",
+  "apiVersion": "core.meshery.io/v1beta1",
+  "displayName": "Performace Test Config",
+  "format": "JSON",
+  "metadata": {
+    "capabilities": "",
+    "defaultData": "",
+    "genealogy": "",
+    "isAnnotation": false,
+    "isNamespaced": true,
+    "logoURL": "",
+    "primaryColor": "",
+    "published": true,
+    "secondaryColor": "",
+    "shape": "rectangle",
+    "shapePolygonPoints": "",
+    "styleOverrides": "",
+    "subCategory": "",
+    "svgColor": "",
+    "svgComplete": "",
+    "svgWhite": ""
+  },
+  "model": {
+    "name": "meshery-perf",
+    "version": "v1",
+    "displayName": "Meshery Performance",
+    "status": "",
+    "category": {
+      "name": "Orchestration \u0026 Management",
+      "metadata": null
+    },
+    "metadata": {
+      "isAnnotation": false,
+      "svgColor": "",
+      "svgWhite": ""
+    },
+    "components": null,
+    "relationships": null
+  },
+  "schema": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"format\":\"uuid\"},\"user_id\":{\"type\":\"string\",\"format\":\"uuid\"},\"name\":{\"type\":\"string\"},\"schedule\":{\"type\":\"string\"},\"loadGenerators\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"endpoints\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"serviceMesh\":{\"type\":\"string\"},\"concurrentRequest\":{\"type\":\"integer\"},\"qps\":{\"type\":\"integer\"},\"duration\":{\"type\":\"string\"},\"lastRun\":{\"type\":\"string\",\"format\":\"date-time\"},\"totalResults\":{\"type\":\"integer\"},\"headers\":{\"type\":\"object\",\"additionalProperties\":{\"type\":\"string\"}},\"cookies\":{\"type\":\"object\",\"additionalProperties\":{\"type\":\"string\"}},\"metadata\":{\"type\":\"object\",\"additionalProperties\":{\"type\":\"string\"}},\"body\":{\"type\":\"string\"},\"contentType\":{\"type\":\"string\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\"},\"updatedAt\":{\"type\":\"string\",\"format\":\"date-time\"}},\"additionalProperties\":false,\"required\":[\"id\",\"user_id\",\"name\",\"loadGenerators\",\"endpoints\",\"serviceMesh\",\"concurrentRequest\",\"qps\",\"duration\",\"totalResults\",\"headers\",\"cookies\",\"metadata\",\"body\",\"contentType\",\"createdAt\",\"updatedAt\"]}"
+}
+
