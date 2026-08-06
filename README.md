@@ -18,7 +18,7 @@
 [![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery-nighthawk/help%20wanted.svg)](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22)
 [![Website](https://img.shields.io/website/https/meshery/meshery.svg)](https://meshery.io)
 [![X Follow](https://img.shields.io/twitter/follow/meshery.svg?label=Follow&style=social)](https://x.com/intent/follow?screen_name=mesheryio)
-[![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.meshery.io)](https://discuss.meshery.io)
+[![Discuss Users](https://img.shields.io/discourse/users?server=https://discuss.meshery.io)](https://discuss.meshery.io)
 [![Slack](https://img.shields.io/badge/Slack-@meshery.svg?logo=slack)](https://slack.meshery.io/)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3564/badge)](https://bestpractices.coreinfrastructure.org/projects/3564)
 [![support: community](https://img.shields.io/badge/support-community-00b39f)](https://github.com/meshery/meshery/blob/master/GOVERNANCE.md#extensions-githubcommeshery-extensions)
